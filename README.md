@@ -1,2 +1,2 @@
-# miguelalmeida2.github.io
-Personal Homepage
+# Personal Website
+This repository contains the source code for my personal website.
