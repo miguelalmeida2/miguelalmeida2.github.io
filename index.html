@@ -37,6 +37,7 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interviews">Interviews</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#donations">Donations</a></li>
                 </ul>
             </div>
         </nav>
@@ -299,22 +300,24 @@
             <section class="resume-section" id="interests">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Interests</h2>
-                    <p><i class="fas fa-book-open-reader mx-2 text-primary"></i>In addition to my role as a Software
-                        Engineer, I
-                        have a strong interest in Austrian Economics
-                        and actively contribute to
-                        open-source projects.</p>
-                    <p><i class="fas fa-chalkboard-user mx-2 text-primary"></i> In 2020, I co-founded "<a
-                            href="https://aceitabitcoin.pt/" target="_blank">Aceita Bitcoin</a>"
-                        in
-                        Portugal alongside a group of Software Engineers. Our
-                        project is now featured
-                        by the <a href="https://mises.pt/aceitabitcoin/" target="_blank">Portuguese Mises Institute</a>,
-                        and we host a weekly podcast where we’ve interviewed
-                        prominent figures from various
-                        sectors, including engineers, economists and university professors.
+                    <p><i class="fas fa-book-open-reader mx-2 text-primary"></i> Beyond my work as a Software Engineer,
+                        I’m passionate
+                        about Austrian Economics and enjoy contributing to open-source projects that make a real impact.
                     </p>
+                    <p><i class="fa-solid fa-sailboat mx-2 text-primary"></i> I’m also eager to take on new challenges
+                        and plan to learn
+                        how to sail a
+                        Laser boat in the near future.</p>
+                    <p><i class="fas fa-chalkboard-user mx-2 text-primary"></i> In 2020, I co-founded "<a
+                            href="https://aceitabitcoin.pt/" target="_blank">Aceita Bitcoin</a>" in Portugal with a
+                        group of Software
+                        Engineers. This project, now featured by the <a href="https://mises.pt/aceitabitcoin/"
+                            target="_blank">Portuguese Mises Institute</a>, includes a weekly podcast where we’ve had
+                        the privilege of
+                        interviewing prominent voices across various fields, from engineers to economists and university
+                        professors.</p>
                 </div>
+
             </section>
             <hr class="m-0" />
             <!-- Projects-->
@@ -584,7 +587,54 @@
                 </div>
             </section>
             <hr class="m-0" />
+            <!-- Donations-->
+            <section class="resume-section" id="donations">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Donations</h2>
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-11 col-xl-9 col-xxl-8">
+                            <!-- -->
+                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                                <div class="card-body p-0">
+                                    <div class="flex-shrink-0 d-flex justify-content-center">
+                                        <img class="d-block d-md-none img-fluid" src="assets/img/qr.png"
+                                            alt="LNURL QR Code" />
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img class="d-none d-md-block col-md-5 img-fluid" src="assets/img/qr.png"
+                                            alt="LNURL QR Code" />
+                                        <div class="col-md-7 p-4">
+                                            <h3 class="fw-bolder">Bitcoin Lightning Donation</h3>
+                                            <p>
+                                                Scan the QR code or copy the invoice below to donate:
+                                            </p>
+                                            <div
+                                                class="flex-shrink-0 mt-1 d-flex justify-content-between align-items-center">
+                                                <button class="btn btn-primary" onclick="copyInvoice()">
+                                                    <i class="fa-solid fa-copy"></i>
+                                                    Copy
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
+        </section>
+        </div>
+        <script>
+            function copyInvoice() {
+                const invoice = 'lnurl1dp68gurn8ghj7ampd3kx2ar0veekzar0wd5xjtnrdakj7tnhv4kxctttdehhwm30d3h82unvwqhhxctswpukgctexy6qljuy5j'; // Replace with your actual Lightning Network invoice
+                navigator.clipboard.writeText(invoice).then(() => {
+                    alert('Invoice copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy invoice: ', err);
+                });
+            }
+        </script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
