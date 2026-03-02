@@ -571,27 +571,27 @@
                     <h2 class="mb-5">Donations</h2>
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-11 col-xl-9 col-xxl-8">
-                            <!-- -->
+                            <!-- Lightning Donation Card -->
                             <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
                                 <div class="card-body p-0">
-                                    <div class="flex-shrink-0 d-flex justify-content-center">
-                                        <img class="d-block d-md-none img-fluid" src="assets/img/qr.png"
-                                            alt="LNURL QR Code" />
+                                    <div class="flex-shrink-0 d-flex d-md-none justify-content-center align-items-center bg-light" style="min-height: 200px;">
+                                        <div id="qrcode-mobile"></div>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <img class="d-none d-md-block col-md-5 img-fluid" src="assets/img/qr.png"
-                                            alt="LNURL QR Code" />
+                                        <div class="d-none d-md-flex col-md-5 justify-content-center align-items-center bg-light" style="min-height: 300px;">
+                                            <div id="qrcode-desktop"></div>
+                                        </div>
                                         <div class="col-md-7 p-4">
-                                            <h3 class="fw-bolder">Bitcoin Lightning Donation</h3>
-                                            <p>
-                                                Scan the QR code or copy the invoice below to donate:
-                                            </p>
-                                            <div
-                                                class="flex-shrink-0 mt-1 d-flex justify-content-between align-items-center">
-                                                <span class="text-primary"></span>
-                                                <button class="btn btn-primary" onclick="copyInvoice()">
+                                            <h3 class="fw-bolder">Lightning Donation</h3>
+                                            <p>Support my work using Bitcoin Lightning Network.</p>
+                                            <div class="flex-shrink-0 mt-4 d-flex justify-content-start align-items-center gap-2 flex-wrap">
+                                                <a class="btn btn-warning" href="lightning:majordragon2@primal.net">
+                                                    <i class="fa-solid fa-bolt"></i>
+                                                    Open in Wallet
+                                                </a>
+                                                <button id="copyBtn" class="btn btn-primary" onclick="copyLightning()">
                                                     <i class="fa-solid fa-copy"></i>
-                                                    Copy
+                                                    Copy Address
                                                 </button>
                                             </div>
                                         </div>
@@ -600,22 +600,75 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
         </div>
         </section>
         </div>
         <script>
-            function copyInvoice() {
-                const invoice = 'lnurl1dp68gurn8ghj7ampd3kx2ar0veekzar0wd5xjtnrdakj7tnhv4kxctttdehhwm30d3h82unvwqhhxctswpukgctexy6qljuy5j'; // Replace with your actual Lightning Network invoice
-                navigator.clipboard.writeText(invoice).then(() => {
-                    alert('Invoice copied to clipboard!');
-                }).catch(err => {
-                    console.error('Failed to copy invoice: ', err);
-                });
+            function copyLightning() {
+                const address = "majordragon2@primal.net";
+                const button = document.getElementById("copyBtn");
+                const originalText = "Copy Address";
+                
+                const updateButtonText = () => {
+                    if (button) {
+                        button.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                        setTimeout(() => {
+                            button.innerHTML = '<i class="fa-solid fa-copy"></i> ' + originalText;
+                        }, 2000);
+                    }
+                };
+                
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(address).then(() => {
+                        updateButtonText();
+                    }).catch(() => {
+                        fallbackCopy(address, updateButtonText);
+                    });
+                } else {
+                    fallbackCopy(address, updateButtonText);
+                }
             }
+
+            function fallbackCopy(text, callback) {
+                const textarea = document.createElement("textarea");
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textarea);
+                callback();
+            }
+
+            // Generate QR code for Lightning address
+            document.addEventListener('DOMContentLoaded', function() {
+                const qrOptions = {
+                    text: "lightning:majordragon2@primal.net",
+                    width: 256,
+                    height: 256,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                };
+                
+                // Generate for mobile
+                const mobileDiv = document.getElementById("qrcode-mobile");
+                if (mobileDiv) {
+                    new QRCode(mobileDiv, qrOptions);
+                }
+                
+                // Generate for desktop
+                const desktopDiv = document.getElementById("qrcode-desktop");
+                if (desktopDiv) {
+                    new QRCode(desktopDiv, qrOptions);
+                }
+            });
         </script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- QR Code js lib-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
     </body>
